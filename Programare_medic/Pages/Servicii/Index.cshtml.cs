@@ -14,13 +14,28 @@ namespace Programare_medic.Pages.Servicii
         }
 
         public IList<Serviciu> Serviciu { get; set; } = default!;
+        public ServiciuData ServiciuD { get; set; }
+        public int ServiciuID { get; set; }
+        public int SectieID { get; set; }
 
-        public async Task OnGetAsync()
+        public async Task OnGetAsync(int? id, int? sectieID)
         {
-            if (_context.Serviciu != null)
+            ServiciuD = new ServiciuData();
+
+            ServiciuD.Servicii = await _context.Serviciu
+            .Include(b => b.Spital)
+            //.Include(b => b.Author)
+            .Include(b => b.ServiciuSectii)
+            .ThenInclude(b => b.Sectie)
+            .AsNoTracking()
+            .OrderBy(b => b.Denumire_Serviciu)
+            .ToListAsync();
+            if (id != null)
             {
-                Serviciu = await _context.Serviciu.Include(b=>b.Spital)
-                    .ToListAsync();
+                ServiciuID = id.Value;
+                Serviciu Serviciu = ServiciuD.Servicii
+                .Where(i => i.ID == id.Value).Single();
+                ServiciuD.Sectii = Serviciu.ServiciuSectii.Select(s => s.Sectie);
             }
         }
     }

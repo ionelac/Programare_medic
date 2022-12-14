@@ -39,6 +39,35 @@
                 <select asp-for="Serviciu.SpitalID" class="form-control" asp-items="ViewBag.SpitalID"> </select>
                 <span asp-validation-for="Serviciu.SpitalID" class="text-danger"></span>
             </div>
+            
+            <div class="form-group">
+                <div class="table">
+                    <table>
+                        <tr>
+                             @{
+                                 int cnt = 0;
+                                 foreach (var cat in Model.SectieAtribuitaServiciuList)
+                                 {
+                                     if (cnt++ % 3 == 0)
+                                     {
+                                         @:</tr><tr>
+                                     }
+                                     @:<td>
+                                         <input type="checkbox"
+                                             name="selectedSectii"
+                                             value="@cat.SectieID"
+                                             @(Html.Raw(cat.Atribuire ?
+                                                 "checked=\"checked\"" : "")) />
+                                         @cat.SectieID @: @cat.Denumire
+                                     @:</td>
+                                 }
+                             @:</tr>
+                             }
+                    </table>
+                </div>
+             </div>
+
+                      
             <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>

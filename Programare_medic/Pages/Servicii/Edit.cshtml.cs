@@ -7,7 +7,7 @@ using System.Security.Policy;
 
 namespace Programare_medic.Pages.Servicii
 {
-    public class EditModel : PageModel
+    public class EditModel : ServiciuSectiiPageModel
     {
         private readonly Programare_medic.Data.Programare_medicContext _context;
 
@@ -26,49 +26,64 @@ namespace Programare_medic.Pages.Servicii
                 return NotFound();
             }
 
-            var serviciu = await _context.Serviciu.FirstOrDefaultAsync(m => m.ID == id);
-            if (serviciu == null)
+            //var serviciu = await _context.Serviciu.FirstOrDefaultAsync(m => m.ID == id);
+            Serviciu = await _context.Serviciu
+              .Include(b => b.Spital)
+              //.Include(b => b.Medic)
+              .Include(b => b.ServiciuSectii).ThenInclude(b => b.Sectie)
+              .AsNoTracking()
+              .FirstOrDefaultAsync(m => m.ID == id);
+
+            PopulareAtribuireSectieServiciu(_context, Serviciu);
+            if (Serviciu == null)
             {
                 return NotFound();
             }
-            Serviciu = serviciu;
+
+            //Serviciu = serviciu;
             ViewData["SpitalID"] = new SelectList(_context.Set<Spital>(), "ID","DenumireSpital");
             return Page();
         }
 
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
+        public async Task<IActionResult> OnPostAsync(int? id, string[]selectedSectii)
         {
-            if (!ModelState.IsValid)
+            if (id == null)
             {
-                return Page();
+                return NotFound();
             }
 
-            _context.Attach(Serviciu).State = EntityState.Modified;
+            var serviciuToUpdate = await _context.Serviciu
+                .Include(i => i.Spital)
+                //.Include(i => i.Medic)
+                .Include(i => i.ServiciuSectii)
+                .ThenInclude(i => i.Sectie)
+                .FirstOrDefaultAsync(s => s.ID == id);
 
-            try
+            if (serviciuToUpdate == null)
             {
+                return NotFound();
+            }
+
+            if (await TryUpdateModelAsync<Serviciu>(
+            serviciuToUpdate,
+            "Serviciu",
+            //i => i.Title, i => i.AuthorID,
+            i => i.Cost_consultatie, i => i.Data_Programare, i => i.SpitalID))
+            {
+                UpdateServiciuSectii(_context, selectedSectii, serviciuToUpdate);
                 await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!ServiciuExists(Serviciu.ID))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
+                return RedirectToPage("./Index");
             }
 
-            return RedirectToPage("./Index");
+            
+            UpdateServiciuSectii(_context, selectedSectii, serviciuToUpdate);
+            PopulareAtribuireSectieServiciu(_context, serviciuToUpdate);
+            return Page();
         }
 
-        private bool ServiciuExists(int id)
-        {
-            return _context.Serviciu.Any(e => e.ID == id);
-        }
+
     }
+
 }

@@ -1,8 +1,8 @@
-﻿@page
+﻿@page "/"
 @model Programare_medic.Pages.Servicii.IndexModel
 
 @{
-    ViewData["Title"] = "Index";
+    ViewData["Denumire_Serviciu"] = "Index";
 }
 
 <h1>Index</h1>
@@ -28,11 +28,21 @@
             <th>
                 @Html.DisplayNameFor(model => model.Serviciu[0].Spital.DenumireSpital)
             </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Serviciu[0].ServiciuSectii)
+            </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Serviciu) {
+@foreach (var item in Model.ServiciuD.Servicii) {
+            string selectedRow = "";
+            if (item.ID == Model.ServiciuID)
+            {
+                selectedRow = "table-success";
+            }
+
+            <tr class="@selectedRow">
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Denumire_Serviciu)
