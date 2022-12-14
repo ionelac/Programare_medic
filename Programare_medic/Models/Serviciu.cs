@@ -21,6 +21,8 @@ namespace Programare_medic.Models
 
         public int? SpitalID { get; set; }
         public Spital? Spital { get; set; }
+        public ICollection<ServiciuSectie>? ServiciuSectii { get; set; }
+
 
     }
 }
