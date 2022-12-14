@@ -18,11 +18,13 @@
                 <input asp-for="Serviciu.Denumire_Serviciu" class="form-control" />
                 <span asp-validation-for="Serviciu.Denumire_Serviciu" class="text-danger"></span>
             </div>
+            <!--
             <div class="form-group">
                 <label asp-for="Serviciu.Medic" class="control-label"></label>
                 <input asp-for="Serviciu.Medic" class="form-control" />
                 <span asp-validation-for="Serviciu.Medic" class="text-danger"></span>
             </div>
+            -->
             <div class="form-group">
                 <label asp-for="Serviciu.Cost_consultatie" class="control-label"></label>
                 <input asp-for="Serviciu.Cost_consultatie" class="form-control" />
@@ -39,21 +41,21 @@
                 <span asp-validation-for="Serviciu.SpitalID" class="text-danger"></span>
             </div>
             
-                <!--
+                
                 <div class="form-group">
-                    <label asp-for="Book.AuthorID" class="control-label">Author Name</label>
-                    <select asp-for="Book.AuthorID" class="form-control" asp-items="ViewBag.AuthorID">
+                    <label asp-for="Serviciu.MedicID" class="control-label">Nume medic</label>
+                    <select asp-for="Serviciu.MedicID" class="form-control" asp-items="ViewBag.MedicID">
                     </select>
-                    <span asp-validation-for="Book.AuthorID" class="text-danger"></span>
+                    <span asp-validation-for="Serviciu.MedicID" class="text-danger"></span>
                 </div>
-                -->
+               
             
                 <div class="form-group">
                     <div class="table">
                         <table>
                             <tr>
                                 <p> 
-                                <p>Alegeti secția  dorită :)</p>
+                                <p>Alegeti secția  dorită :</p>
                                 @{
                                     int cnt = 0;
                                     foreach (var cat in Model.SectieAtribuitaServiciuList)

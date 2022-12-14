@@ -10,11 +10,14 @@ namespace Programare_medic.Models
         public int ID { get; set; }
 
         [Display(Name = "Serviciu")]
-
         public string Denumire_Serviciu { get; set; }
-        public string Medic { get; set; }
+
+        public int? MedicID { get; set; }
+        public Medic? Medic { get; set; }
+
         [Column(TypeName = "decimal(6, 2)")]
         public decimal Cost_consultatie { get; set; }
+
         [Display(Name = "Data Programare")]
         [DataType(DataType.Date)]
         public DateTime Data_Programare { get; set; }

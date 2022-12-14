@@ -17,15 +17,16 @@ namespace Programare_medic.Pages.Servicii
 
         public IActionResult OnGet()
         {
-            /*
-            var authorlist = _context.Author.Select(x => new
+            
+            var mediclist = _context.Medic.Select(x => new
             {
                 x.ID,
-                FullName = x.LastName + " " + x.FirstName
+                NumeComplet = x.Nume + " " + x.Prenume
             });
             
-            ViewData["AuthorID"] = new SelectList(authorlist, "ID", "FullName");
-            */
+            ViewData["MedicID"] = new SelectList(mediclist, "ID", "NumeComplet");
+            
+
             ViewData["SpitalID"] = new SelectList(_context.Set<Spital>(), "ID","DenumireSpital");
             var serviciu = new Serviciu();
             serviciu.ServiciuSectii = new List<ServiciuSectie>();
@@ -36,7 +37,6 @@ namespace Programare_medic.Pages.Servicii
         [BindProperty]
         public Serviciu Serviciu { get; set; }
 
-        //fhsjfhuieshfiuweh
         public async Task<IActionResult> OnPostAsync(string[] selectedSectii)
         {
             var newServiciu = Serviciu;

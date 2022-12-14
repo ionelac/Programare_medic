@@ -21,7 +21,7 @@ namespace Programare_medic.Pages.Servicii
 
         public async Task<IActionResult> OnGetAsync(int? id)
         {
-            if (id == null || _context.Serviciu == null)
+            if (id == null)
             {
                 return NotFound();
             }
@@ -29,7 +29,7 @@ namespace Programare_medic.Pages.Servicii
             //var serviciu = await _context.Serviciu.FirstOrDefaultAsync(m => m.ID == id);
             Serviciu = await _context.Serviciu
               .Include(b => b.Spital)
-              //.Include(b => b.Medic)
+              .Include(b => b.Medic)
               .Include(b => b.ServiciuSectii).ThenInclude(b => b.Sectie)
               .AsNoTracking()
               .FirstOrDefaultAsync(m => m.ID == id);
@@ -40,8 +40,15 @@ namespace Programare_medic.Pages.Servicii
                 return NotFound();
             }
 
+            var medicList = _context.Medic.Select(x => new
+            {
+                x.ID,
+                NumeComplet = x.Nume + " " + x.Prenume
+            });
+
             //Serviciu = serviciu;
             ViewData["SpitalID"] = new SelectList(_context.Set<Spital>(), "ID","DenumireSpital");
+            ViewData["MedicID"] = new SelectList(medicList, "ID", "NumeComplet");
             return Page();
         }
 
@@ -56,7 +63,7 @@ namespace Programare_medic.Pages.Servicii
 
             var serviciuToUpdate = await _context.Serviciu
                 .Include(i => i.Spital)
-                //.Include(i => i.Medic)
+                .Include(i => i.Medic)
                 .Include(i => i.ServiciuSectii)
                 .ThenInclude(i => i.Sectie)
                 .FirstOrDefaultAsync(s => s.ID == id);
@@ -69,7 +76,7 @@ namespace Programare_medic.Pages.Servicii
             if (await TryUpdateModelAsync<Serviciu>(
             serviciuToUpdate,
             "Serviciu",
-            //i => i.Title, i => i.AuthorID,
+            i => i.Denumire_Serviciu, i => i.MedicID,
             i => i.Cost_consultatie, i => i.Data_Programare, i => i.SpitalID))
             {
                 UpdateServiciuSectii(_context, selectedSectii, serviciuToUpdate);

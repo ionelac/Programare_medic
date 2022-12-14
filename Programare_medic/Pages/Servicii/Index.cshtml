@@ -2,7 +2,7 @@
 @model Programare_medic.Pages.Servicii.IndexModel
 
 @{
-    ViewData["Denumire_Serviciu"] = "Index";
+    ViewData["Title"] = "Index";
 }
 
 <h1>Index</h1>
@@ -23,10 +23,10 @@
                 @Html.DisplayNameFor(model => model.Serviciu[0].Cost_consultatie)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Serviciu[0].Data_Programare)
+                @Html.DisplayNameFor(model =>model.Serviciu[0].Data_Programare)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Serviciu[0].Spital.DenumireSpital)
+                @Html.DisplayNameFor(model =>model.Serviciu[0].Spital.DenumireSpital)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Serviciu[0].ServiciuSectii)
@@ -35,7 +35,8 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.ServiciuD.Servicii) {
+        @foreach (var item in Model.ServiciuD.Servicii)
+        {
             string selectedRow = "";
             if (item.ID == Model.ServiciuID)
             {
@@ -43,28 +44,39 @@
             }
 
             <tr class="@selectedRow">
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Denumire_Serviciu)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Medic)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Cost_consultatie)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Data_Programare)
-            </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Denumire_Serviciu)
+                </td>
+
+                <td>
+                    @Html.DisplayFor(modelItem => item.Medic.Nume)
+                    @Html.DisplayFor(modelItem => item.Medic.Prenume)
+
+                </td>
+               
+                <td>
+                    @Html.DisplayFor(modelItem => item.Cost_consultatie)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Data_Programare)
+                </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Spital.DenumireSpital)
                 </td>
-            <td>
-                <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
-                <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
-                <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
-            </td>
-        </tr>
-}
+                <td>
+                  
+                        @foreach (var sectie in item.ServiciuSectii)
+                        {
+                         @sectie.Sectie.ID @: @sectie.Sectie.DenumireSectie <br />
+                        }
+                    
+                </td>
+                <td>
+                    <a asp-page="./Edit" asp-route-id="@item.ID">Edit</a> |
+                    <a asp-page="./Details" asp-route-id="@item.ID">Details</a> |
+                    <a asp-page="./Delete" asp-route-id="@item.ID">Delete</a>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>

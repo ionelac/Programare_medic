@@ -1,12 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Policy;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Programare_medic.Data;
 using Programare_medic.Models;
+using Programare_medic.Models.ViewModels;
+
 
 namespace Programare_medic.Pages.Spitale
 {
@@ -21,11 +24,23 @@ namespace Programare_medic.Pages.Spitale
 
         public IList<Spital> Spital { get;set; } = default!;
 
-        public async Task OnGetAsync()
+        public SpitalIndexData SpitalData { get; set; }
+        public int SpitalID { get; set; }
+        public int ServiciuID { get; set; }
+        public async Task OnGetAsync(int? id, int? bookID)
         {
-            if (_context.Spital != null)
+            SpitalData = new SpitalIndexData();
+            SpitalData.Spitale = await _context.Spital
+            .Include(i => i.Servicii)
+            .ThenInclude(c => c.Medic)
+            .OrderBy(i => i.DenumireSpital)
+            .ToListAsync();
+            if (id != null)
             {
-                Spital = await _context.Spital.ToListAsync();
+                SpitalID = id.Value;
+                Spital publisher = SpitalData.Spitale
+                .Where(i => i.ID == id.Value).Single();
+                SpitalData.Servicii = publisher.Servicii;
             }
         }
     }
