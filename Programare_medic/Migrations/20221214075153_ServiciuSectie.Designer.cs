@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Programare_medic.Data;
 
@@ -11,9 +12,10 @@ using Programare_medic.Data;
 namespace Programare_medic.Migrations
 {
     [DbContext(typeof(Programare_medicContext))]
-    partial class Programare_medicContextModelSnapshot : ModelSnapshot
+    [Migration("20221214075153_ServiciuSectie")]
+    partial class ServiciuSectie
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
