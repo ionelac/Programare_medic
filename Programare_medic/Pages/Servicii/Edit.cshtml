@@ -19,11 +19,13 @@
                 <input asp-for="Serviciu.Denumire_Serviciu" class="form-control" />
                 <span asp-validation-for="Serviciu.Denumire_Serviciu" class="text-danger"></span>
             </div>
+            <!--
             <div class="form-group">
                 <label asp-for="Serviciu.Medic" class="control-label"></label>
                 <input asp-for="Serviciu.Medic" class="form-control" />
                 <span asp-validation-for="Serviciu.Medic" class="text-danger"></span>
             </div>
+            -->
             <div class="form-group">
                 <label asp-for="Serviciu.Cost_consultatie" class="control-label"></label>
                 <input asp-for="Serviciu.Cost_consultatie" class="form-control" />
@@ -39,6 +41,14 @@
                 <select asp-for="Serviciu.SpitalID" class="form-control" asp-items="ViewBag.SpitalID"> </select>
                 <span asp-validation-for="Serviciu.SpitalID" class="text-danger"></span>
             </div>
+
+            <div class="form-group">
+                <label asp-for="Serviciu.MedicID" class="control-label">Nume medic</label>
+                <select asp-for="Serviciu.MedicID" class="form-control" asp-items="ViewBag.MedicID">
+                </select>
+                <span asp-validation-for="Serviciu.MedicID" class="text-danger"></span>
+            </div>
+
             
             <div class="form-group">
                 <div class="table">
@@ -53,7 +63,7 @@
                                          @:</tr><tr>
                                      }
                                      @:<td>
-                                         <input type="checkbox"
+                                         <input type="radio"
                                              name="selectedSectii"
                                              value="@cat.SectieID"
                                              @(Html.Raw(cat.Atribuire ?

@@ -10,23 +10,37 @@
 <p>
     <a asp-page="Create">Create New</a>
 </p>
+
+<form asp-page="./Index" method="get">
+    <div class="form-actions no-color">
+        <p>
+             Găsiți după denumirea serviciului / numele medicului:
+             <input type="text" name="SearchString" value="@Model.CurrentFilter"/>
+             <input type="submit" value="Search" class="btn btn-primary" /> |
+             <a asp-page="./Index">Back to full List</a>
+        </p>
+     </div>
+</form>
+
 <table class="table">
     <thead>
         <tr>
             <th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.DenumireServiciuSort">
                 @Html.DisplayNameFor(model => model.Serviciu[0].Denumire_Serviciu)
+                </a>
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Serviciu[0].Medic)
-            </th>
+            
             <th>
                 @Html.DisplayNameFor(model => model.Serviciu[0].Cost_consultatie)
             </th>
             <th>
                 @Html.DisplayNameFor(model =>model.Serviciu[0].Data_Programare)
             </th>
-            <th>
+            <th colspan="2">
+                <a asp-page="./Index" asp-route-sortOrder="@Model.MedicSort">
                 @Html.DisplayNameFor(model =>model.Serviciu[0].Spital.DenumireSpital)
+                </a>
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Serviciu[0].ServiciuSectii)

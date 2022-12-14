@@ -43,6 +43,71 @@ namespace Programare_medic.Migrations
                     b.ToTable("Medic");
                 });
 
+            modelBuilder.Entity("Programare_medic.Models.Pacient", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Nume")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Prenume")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Telefon")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int?>("Varsta")
+                        .HasColumnType("int");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Pacient");
+                });
+
+            modelBuilder.Entity("Programare_medic.Models.Programare", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"), 1L, 1);
+
+                    b.Property<DateTime>("DataProgramare")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int?>("MedicID")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("PacientID")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("ServiciuID")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("SpitalID")
+                        .HasColumnType("int");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("MedicID");
+
+                    b.HasIndex("PacientID");
+
+                    b.HasIndex("ServiciuID");
+
+                    b.HasIndex("SpitalID");
+
+                    b.ToTable("Programare");
+                });
+
             modelBuilder.Entity("Programare_medic.Models.Sectie", b =>
                 {
                     b.Property<int>("ID")
@@ -133,6 +198,33 @@ namespace Programare_medic.Migrations
                     b.ToTable("Spital");
                 });
 
+            modelBuilder.Entity("Programare_medic.Models.Programare", b =>
+                {
+                    b.HasOne("Programare_medic.Models.Medic", "Medic")
+                        .WithMany()
+                        .HasForeignKey("MedicID");
+
+                    b.HasOne("Programare_medic.Models.Pacient", "Pacient")
+                        .WithMany("Programari")
+                        .HasForeignKey("PacientID");
+
+                    b.HasOne("Programare_medic.Models.Serviciu", "Serviciu")
+                        .WithMany()
+                        .HasForeignKey("ServiciuID");
+
+                    b.HasOne("Programare_medic.Models.Spital", "Spital")
+                        .WithMany()
+                        .HasForeignKey("SpitalID");
+
+                    b.Navigation("Medic");
+
+                    b.Navigation("Pacient");
+
+                    b.Navigation("Serviciu");
+
+                    b.Navigation("Spital");
+                });
+
             modelBuilder.Entity("Programare_medic.Models.Serviciu", b =>
                 {
                     b.HasOne("Programare_medic.Models.Medic", "Medic")
@@ -170,6 +262,11 @@ namespace Programare_medic.Migrations
             modelBuilder.Entity("Programare_medic.Models.Medic", b =>
                 {
                     b.Navigation("Servicii");
+                });
+
+            modelBuilder.Entity("Programare_medic.Models.Pacient", b =>
+                {
+                    b.Navigation("Programari");
                 });
 
             modelBuilder.Entity("Programare_medic.Models.Sectie", b =>

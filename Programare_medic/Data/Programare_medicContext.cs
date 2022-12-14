@@ -17,5 +17,9 @@ namespace Programare_medic.Data
         public DbSet<Programare_medic.Models.Sectie> Sectie { get; set; }
 
         public DbSet<Programare_medic.Models.Medic> Medic { get; set; }
+
+        public DbSet<Programare_medic.Models.Programare> Programare { get; set; }
+
+        public DbSet<Programare_medic.Models.Pacient> Pacient { get; set; }
     }
 }
