@@ -19,6 +19,7 @@ namespace Programare_medic.Pages.Programari
             _context = context;
         }
 
+
         public IList<Programare> Programare { get;set; } = default!;
 
         public async Task OnGetAsync()

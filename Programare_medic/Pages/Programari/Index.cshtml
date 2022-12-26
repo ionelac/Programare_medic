@@ -5,7 +5,13 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<head>
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+</head>
+
+<div class="cutie" class="cutie" data-aos="fade-right" data-aos-duration="2000">
+
+<h1>PROGRAMĂRI:</h1>
 
 <p>
     <a asp-page="Create">Create New</a>
@@ -28,9 +34,7 @@
             <th>
                 @Html.DisplayNameFor(model => model.Programare[0].DataProgramare)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Programare[0].Spital)
-            </th>
+            
             <th></th>
         </tr>
     </thead>
@@ -59,3 +63,9 @@
 }
     </tbody>
 </table>
+</div>
+
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>
+    AOS.init();
+</script>

@@ -19,7 +19,11 @@ namespace Programare_medic.Pages.Servicii
         public int SectieID { get; set; }
         public string DenumireServiciuSort { get; set; }
         public string MedicSort { get; set; }
+        public decimal CostSort { get; set; }
         public string CurrentFilter { get; set; }
+
+        //pentru a afisa doctorii de la fiecare sectie
+
 
 
         public async Task OnGetAsync(int? id, int? sectieID, string sortOrder, string

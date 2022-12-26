@@ -4,23 +4,29 @@
 @{
     ViewData["Title"] = "Index";
 }
+<head>
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+</head>
 
-<h1>Index</h1>
+<div class="cutie" data-aos="fade-right" data-aos-duration="2000">
+  <h1>SERVICII:</h3>
+  <p>Gama de servicii oferite prin cadrul parteneriatului cu diferite spitale, sunt:</p>
 
-<p>
-    <a asp-page="Create">Create New</a>
-</p>
+  <p>
+   <a asp-page="Create">Create New</a>
+  </p>
 
-<form asp-page="./Index" method="get">
-    <div class="form-actions no-color">
-        <p>
-             Găsiți după denumirea serviciului / numele medicului:
-             <input type="text" name="SearchString" value="@Model.CurrentFilter"/>
-             <input type="submit" value="Search" class="btn btn-primary" /> |
-             <a asp-page="./Index">Back to full List</a>
-        </p>
-     </div>
-</form>
+  <form asp-page="./Index" method="get">
+      <div class="form-actions no-color">
+          <p>
+               Găsiți după denumirea serviciului / numele medicului:
+               <input type="text" name="SearchString" value="@Model.CurrentFilter"/>
+               <input type="submit" value="Search" class="btn btn-primary" /> |
+               <a asp-page="./Index">Back to full List</a>
+          </p>
+      </div>
+  </form>
+
 
 <table class="table">
     <thead>
@@ -30,6 +36,12 @@
                 @Html.DisplayNameFor(model => model.Serviciu[0].Denumire_Serviciu)
                 </a>
             </th>
+
+            <th>
+                <a asp-page="./Index" asp-route-sortOrder="@Model.MedicSort">
+                @Html.DisplayNameFor(model => model.Serviciu[0].Medic)
+                </a>
+            </th>
             
             <th>
                 @Html.DisplayNameFor(model => model.Serviciu[0].Cost_consultatie)
@@ -37,14 +49,13 @@
             <th>
                 @Html.DisplayNameFor(model =>model.Serviciu[0].Data_Programare)
             </th>
-            <th colspan="2">
-                <a asp-page="./Index" asp-route-sortOrder="@Model.MedicSort">
-                @Html.DisplayNameFor(model =>model.Serviciu[0].Spital.DenumireSpital)
-                </a>
-            </th>
             <th>
-                @Html.DisplayNameFor(model => model.Serviciu[0].ServiciuSectii)
+                @Html.DisplayNameFor(model =>model.Serviciu[0].Spital.DenumireSpital)
             </th>
+            <th colspan="2">
+                @Html.DisplayNameFor(model =>model.Serviciu[0].ServiciuSectii)
+            </th>
+       
             <th></th>
         </tr>
     </thead>
@@ -94,3 +105,11 @@
         }
     </tbody>
 </table>
+<div/>
+
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>
+   AOS.init();
+</script>
+
+

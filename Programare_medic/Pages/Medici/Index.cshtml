@@ -1,11 +1,17 @@
-﻿@page
+﻿@page "{id:int?}"
+
 @model Programare_medic.Pages.Medici.IndexModel
 
 @{
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<head>
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+</head>
+
+<div class="cutie" lass="cutie" data-aos="fade-right" data-aos-duration="2000">
+<h1>MEDICI:</h1>
 
 <p>
     <a asp-page="Create">Create New</a>
@@ -23,8 +29,10 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Medic) {
-        <tr>
+
+      @foreach (var item in Model.Medic) 
+      {
+            <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Nume)
             </td>
@@ -40,3 +48,9 @@
 }
     </tbody>
 </table>
+</div>
+
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>
+    AOS.init();
+</script>

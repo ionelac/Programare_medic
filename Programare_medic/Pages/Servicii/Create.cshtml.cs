@@ -1,11 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Programare_medic.Models;
+using System.Data;
 using System.Security.Policy;
 
 namespace Programare_medic.Pages.Servicii
 {
+    [Authorize(Roles = "Admin")]
     public class CreateModel : ServiciuSectiiPageModel
     {
         private readonly Programare_medic.Data.Programare_medicContext _context;

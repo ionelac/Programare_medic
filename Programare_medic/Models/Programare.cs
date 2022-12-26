@@ -16,6 +16,7 @@ namespace Programare_medic.Models
         public Serviciu? Serviciu{ get; set; }
 
         [DataType(DataType.Date)]
+        [Display(Name = "Data programare")]
         public DateTime DataProgramare { get; set; }
 
         public int? SpitalID { get; set; }

@@ -1,4 +1,5 @@
 ﻿<!DOCTYPE html>
+
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -7,6 +8,43 @@
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/Programare_medic.styles.css" asp-append-version="true" />
+    <style>
+
+    body{
+        background-color: #809BC8;
+        color: white;
+    }
+        
+    
+    .cutie{
+        border: 1px solid rgba(255, 255, 255, 0.3);
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 16px;
+        box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        backdrop-filter: blur(5px);
+        padding: 10px;
+    }
+    td{
+        color: white;
+    }
+
+    th{
+        color: white;
+    }
+
+    .nav-link{
+        color: black;
+
+    }
+
+    .nav-item:hover{
+        background-color: #377ea0;
+        border-radius: 16px;
+        transition: 0.5s;
+    }
+
+
+    </style>
 </head>
 <body>
     <header>
@@ -25,11 +63,15 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Sectii/Index">Sectii</a>
                         </li>
+
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asppage="/Pacienti/Index">Pacienti</a>
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Medici/Index">Medici</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asppage="/Programari/Index">Programari</a>
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Pacienti/Index">Pacienti</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Programari/Index">Programari</a>
                         </li>
                     </ul>
                     <partial name="_LoginPartial" />
@@ -37,6 +79,7 @@
             </div>
         </nav>
     </header>
+
     <div class="container">
         <main role="main" class="pb-3">
             @RenderBody()
@@ -44,8 +87,8 @@
     </div>
 
     <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2022 - Programare_medic - <a asp-area="" asp-page="/Privacy">Privacy</a>
+        <div class="container" style="color:white">
+            &copy; 2022 - Ionela Comșa & Adela Kovacs - <a asp-area="" asp-page="/Privacy">Privacy</a>
         </div>
     </footer>
 
@@ -54,5 +97,6 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
 
     @await RenderSectionAsync("Scripts", required: false)
+   
 </body>
 </html>

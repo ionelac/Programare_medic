@@ -4,11 +4,14 @@
 @{
     ViewData["Title"] = "Index";
 }
+<head>
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+</head>
 
-<h1>Index</h1>
+<div class="cutie" class="table" class="cutie" data-aos="fade-right" data-aos-duration="2000">
 
-
-<table class="table">
+<h1>PACIENȚI:</h1>
+ <table class="table">
     <thead>
         <tr>
             <th>
@@ -55,3 +58,9 @@
 }
     </tbody>
 </table>
+</div>
+
+<script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+<script>
+    AOS.init();
+</script>
