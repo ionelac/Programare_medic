@@ -24,5 +24,7 @@ namespace Programare_medic.Models
             }
         }
         public ICollection<Serviciu>? Servicii { get; set; }
+
+        public String Imagine { get; set; }
     }
 }

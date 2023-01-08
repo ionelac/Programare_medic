@@ -24,11 +24,11 @@
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Medic.Prenume)
         </dd class="col-sm-10">
-           <h3>Imagine</h3>
-           <img src="wwwroot/css/imagine1.jpg" width="100px">
-        <dd>
-
-        </dd>
+        <dd class="col-sm-10">
+            <p>
+            <img src="@Html.DisplayFor(model => model.Medic.Imagine)" width="400px" style="border-radius:15px"/>
+        </dd class="col-sm-10">
+       
     </dl>
 </div>
 <div>

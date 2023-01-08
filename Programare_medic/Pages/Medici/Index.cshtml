@@ -20,6 +20,9 @@
     <thead>
         <tr>
             <th>
+                @Html.DisplayNameFor(model => model.Medic[0].Imagine)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Medic[0].Nume)
             </th>
             <th>
@@ -33,6 +36,9 @@
       @foreach (var item in Model.Medic) 
       {
             <tr>
+            <td>
+               <img src="@Html.DisplayFor(modelItem => item.Imagine)" width="100px" style="border-radius:10px"/>
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Nume)
             </td>

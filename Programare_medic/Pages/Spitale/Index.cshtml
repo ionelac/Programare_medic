@@ -20,6 +20,9 @@
     <thead>
         <tr>
             <th>
+                @Html.DisplayNameFor(model => model.Spital[0].Imagine)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Spital[0].DenumireSpital)
             </th>
             <th></th>
@@ -35,6 +38,9 @@
             }
 
         <tr class="@selectedRow">
+            <td>
+                <img src="@Html.DisplayFor(modelItem => item.Imagine)" width="100px" style="border-radius:10px" />
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.DenumireSpital)
             </td>

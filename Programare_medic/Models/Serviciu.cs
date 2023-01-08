@@ -11,7 +11,7 @@ namespace Programare_medic.Models
 
         [Display(Name = "Serviciu")]
         [RegularExpression(@"^[A-Z]+[a-z\s]*$", ErrorMessage = "Denumirea serviciului trebuie să înceapă cu majusculă și să aibă o lungime minimă de caractere 3")]
-        [StringLength(30, MinimumLength = 3)]
+        [StringLength(70, MinimumLength = 3)]
         public string Denumire_Serviciu { get; set; }
 
         public int? MedicID { get; set; }
